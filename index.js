@@ -19,10 +19,25 @@ const rosterSchema = new mongoose.Schema(
         name: {type: String, required: true},
         image: {type: String},
         grade: { type: Number, default: 0 },
+        rookie: {type: Boolean, default: true}
     }
 );
 
-const Memeber = mongoose.model("Member", rosterSchema, "Members")
+const Member = mongoose.model("Member", rosterSchema, "Members");
+
+app.post("/add/member", async (req, res) => {
+  const person = await new Member({
+    name: req.body.name,
+    image: req.body.image,
+    grade: req.body.grade,
+    rookie: req.body.rookie,
+  }).save()
+  res.json(person)
+});
+
+app.get("/", (req, res) => {
+  res.render(roster.ejs)
+})
 
 async function startServer() {
     await mongoose.connect(
