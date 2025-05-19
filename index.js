@@ -35,8 +35,9 @@ app.post("/add/member", async (req, res) => {
   res.json(person)
 });
 
-app.get("/", (req, res) => {
-  res.render(roster.ejs)
+app.get("/", async (req, res) => {
+  const roster = await Member.find({})
+  res.render("roster.ejs", {roster})
 })
 
 async function startServer() {
