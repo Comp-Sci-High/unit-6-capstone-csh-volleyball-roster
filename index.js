@@ -40,6 +40,19 @@ app.get("/", async (req, res) => {
   res.render("roster.ejs", {roster})
 })
 
+app.delete("/delete/member/:id", async (req, res) => {
+  const res = await Member.findOneAndDelete({_id: req.params.id})
+  res.json(res)
+})
+
+app.patch("/update/member/:id", async (req, res) => {
+  const res = await Member.findOneAndUpdate(
+    {name: req.params.name},
+    {image: req.body.image},
+    {new: true})
+  res.json
+})
+
 async function startServer() {
     await mongoose.connect(
       "mongodb+srv://SE12:CSH2025@cluster0.u9yhg.mongodb.net/CSHpets?retryWrites=true&w=majority&appName=Cluster0"
