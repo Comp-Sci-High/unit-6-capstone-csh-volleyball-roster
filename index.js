@@ -18,7 +18,7 @@ const rosterSchema = new mongoose.Schema(
     {
         name: {type: String, required: true},
         image: {type: String},
-        grade: { type: Number, default: 0 },
+        grade: { type: Number, default: 9 },
         rookie: {type: Boolean, default: true}
     }
 );
@@ -30,7 +30,8 @@ app.post("/add/member", async (req, res) => {
     name: req.body.name,
     image: req.body.image,
     grade: req.body.grade,
-    rookie: req.body.rookie,
+    yearsPlayed: req.body.yearsPlayed,
+    jerseyNum: req.body.jerseyNum,
   }).save()
   res.json(person)
 });
@@ -41,14 +42,17 @@ app.get("/", async (req, res) => {
 })
 
 app.delete("/delete/member/:id", async (req, res) => {
-  const res = await Member.findOneAndDelete({_id: req.params.id})
+  const remove = await Member.findOneAndDelete({_id: req.params.id})
   res.json(res)
 })
 
 app.patch("/update/member/:id", async (req, res) => {
-  const res = await Member.findOneAndUpdate(
+  const update = await Member.findOneAndUpdate(
     {name: req.params.name},
     {image: req.body.image},
+    {grade: req.body.grade},
+    {yearsPlayed: req.body.yearsPlayed},
+    {jerseyNum: req.body.jerseyNum},
     {new: true})
   res.json
 })

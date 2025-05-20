@@ -17,26 +17,26 @@
       <h1 class="subhead">The Pythons</h1>
     </div>
     <section class="card-grid">
-      <!-- Row 1 -->
+      <% for(let x = 0; x < items.length; x++){ %>
       <div class="card-row">
         <!-- Repeat this block for each player -->
         <div class="card">
           <img src="player1.jpg" alt="Player 1">
-          <p>Player Name</p>
-          <p>Position</p>
-          <p>Grade</p>
-          <p>Number</p>
+          <p>Name:<%= roster[x].name %> </p>
+          <p>Years Played: <%= roster[x].yearsPlayed %></p>
+          <p>Number: <%= roster[x].jerseyNum %></p>
+          <p>Grade: <%= roster[x].grade %></p>
         </div>
         <!-- Add 4 more cards for row 1 -->
       </div>
-
+      <% } %>
     </section>
   </main>
 
   <footer>
-    <a href="https://www.schoolwebsite.edu">
+    <a href="https://www.instagram.com/csh_athletics/">
       <img src="school-logo.png" alt="School Logo">
-      <span>Visit Our School Website</span>
+      <span>Athletics Page</span>
     </a>
   </footer>
 </body>
