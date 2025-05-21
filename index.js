@@ -37,7 +37,7 @@ app.post("/add/member", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  const roster = await Member.find({})
+  const roster = await Member.find({}).sort({ createdAt: -1 })
   res.render("roster.ejs", {roster})
 })
 
