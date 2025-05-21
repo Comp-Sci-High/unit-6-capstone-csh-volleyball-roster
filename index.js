@@ -18,8 +18,9 @@ const rosterSchema = new mongoose.Schema(
     {
         name: {type: String, required: true},
         image: {type: String},
-        grade: { type: Number, default: 9 },
-        rookie: {type: Boolean, default: true}
+        grade: { type: Number, default: 9, required: true },
+        yearsPlayed: {type: Number, default: 1},
+        jerseyNum: {type: Number, default: 0, required: true},
     }
 );
 
@@ -38,6 +39,7 @@ app.post("/add/member", async (req, res) => {
 
 app.get("/", async (req, res) => {
   const roster = await Member.find({}).sort({ createdAt: -1 })
+  console.log(roster)
   res.render("roster.ejs", {roster})
 })
 
