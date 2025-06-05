@@ -42,6 +42,10 @@ app.get("/", async (req, res) => {
   console.log(roster)
   res.render("roster.ejs", {roster})
 })
+app.get("/api", async (req, res) => {
+  const roster = await Member.find({}).sort({ createdAt: -1 })
+  res.json(roster)
+})
 
 app.delete("/delete/member/:id", async (req, res) => {
   const remove = await Member.findOneAndDelete({_id: req.params.id})
